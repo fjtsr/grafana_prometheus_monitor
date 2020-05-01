@@ -10,11 +10,10 @@ services:
     restart: always
   exporter:
     image: prom/node-exporter:v0.18.1
-    ports:
-      - 9100:9100
-    restart: always
   grafana:
     image: grafana/grafana:6.7.3
+    volumes: 
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./dashboards:/var/lib/grafana_dashboards
     ports:
       - 3000:3000
-    restart: always
