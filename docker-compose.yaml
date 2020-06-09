@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   prometheus:
     image: prom/prometheus:v2.17.2
@@ -10,10 +10,13 @@ services:
     restart: always
   exporter:
     image: prom/node-exporter:v0.18.1
+    command: 
+      - "--collector.textfile.directory=/tmp"
     volumes:
       - /proc:/host/proc
       - /sys:/host/sys
       - /:/rootfs
+      - ./volumes/collector:/tmp
   grafana:
     image: grafana/grafana:6.7.3
     volumes: 
@@ -21,3 +24,7 @@ services:
       - ./dashboards:/var/lib/grafana_dashboards
     ports:
       - 3000:3000
+  collector:
+    build: ./prom_metrics_collector
+    volumes: 
+      - ./volumes/collector:/tmp
