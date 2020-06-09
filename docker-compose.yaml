@@ -10,6 +10,10 @@ services:
     restart: always
   exporter:
     image: prom/node-exporter:v0.18.1
+    volumes:
+      - /proc:/host/proc
+      - /sys:/host/sys
+      - /:/rootfs
   grafana:
     image: grafana/grafana:6.7.3
     volumes: 

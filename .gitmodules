@@ -1,0 +1,3 @@
+[submodule "prom_metrics_collector"]
+	path = prom_metrics_collector
+	url = git@github.com:fjtsr/prom_metrics_collector.git
